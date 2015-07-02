@@ -5,9 +5,10 @@
  * Date: 2015/6/28
  * Time: 22:02
  */
-if(!$_SESSION['user_id']){
-    header('location:html/login/login.html');
+include 'core/common.php';
+if(empty($_SERVER['PATH_INFO'])){
+    header("location:".__APP__."/index.php");
 }
 else{
-    header('location:html/view/index.php');
+    include($_SERVER['PATH_INFO']);
 }

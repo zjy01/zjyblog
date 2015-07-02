@@ -57,7 +57,8 @@ class table {
                     $returnValue= mysql_insert_id();
                 }
                 else{
-                    $returnValue= mysql_error();
+                    $returnValue= false;
+                    echo mysql_error();
                 }
                 break;
             case 'select':
@@ -75,7 +76,8 @@ class table {
                     }
                 }
                 else{
-                    $returnValue= mysql_error();
+                    $returnValue= false;
+                    echo mysql_error();
                 }
                 break;
             case 'update':
@@ -90,11 +92,13 @@ class table {
                         $returnValue=true;
                     }
                     else{
-                        $returnValue =mysql_error();
+                        $returnValue= false;
+                        echo mysql_error();
                     }
                 }
                 else{
-                    $returnValue =mysql_error();
+                    $returnValue= false;
+                    echo mysql_error();
                 }
                 break;
             case 'delete':
@@ -104,11 +108,13 @@ class table {
                         $returnValue=true;
                     }
                     else{
-                        $returnValue =mysql_error();
+                        $returnValue= false;
+                        echo mysql_error();
                     }
                 }
                 else{
-                    $returnValue =mysql_error();
+                    $returnValue= false;
+                    echo mysql_error();
                 }
                 break;
             default:$returnValue= false;
