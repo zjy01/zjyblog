@@ -5,8 +5,8 @@
  * Date: 2015/7/1
  * Time: 19:49
  */
-header("Content-Type: text/html; charset=utf-8");
 include 'config/config.php';
+header("Content-Type: text/html; charset=utf-8");
 include 'class/table.class.php';
 include 'function/func.php';
 

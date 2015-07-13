@@ -14,9 +14,9 @@ $face=trim($_POST['face']);
 
 $arr['user_name']=$name;
 $arr['user_password']=md5($password);
-$arr['user_email']=md5($email);
-$arr['user_remark']=md5($remark);
-$arr['user_face']=md5($face);
+$arr['user_email']=$email;
+$arr['user_remark']=$remark;
+$arr['user_face']=$face;
 
 if($password!=$repassword){
     _alert("两次密码不一致");
@@ -28,5 +28,5 @@ else{
 
     header("refresh:3;url=".__APP__."/login/login.php");
 
-    print("注册成功，请登陆");
+    print("注册成功，请登陆，3秒后跳转");
 }

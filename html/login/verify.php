@@ -10,7 +10,12 @@ if($_GET['verify']){
     $userName=urldecode($_GET['userName']);
     $re=$user->select('user_id')->where("user_name='$userName'")->sql();
     if($re){//已注册
-        echo 0;
+        if($re[0]['user_id']==$_SESSION['user_id']){
+            echo 1;
+        }
+        else{
+            echo 0;
+        }
     }
     else{
         echo 1;

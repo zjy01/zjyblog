@@ -6,13 +6,7 @@
  * Time: 16:37
  */
 if(defined("__APP__")){
-    if(empty($_SESSION['user_id'])){
-        header("location:".__APP__.'\login\login.php');
-    }
-    else{
-        print("已登陆");
-        var_dump($_COOKIE);
-    }
+    header("location:".__APP__.'\view\home.php');
 }
 else{
     echo "You do not have permission";

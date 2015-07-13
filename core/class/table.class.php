@@ -11,10 +11,15 @@ class table {
     public $attr;
     public $query;
     public $where;
+    public $order;
+    public $li;
+    public $inWord;
     function __construct($table=''){
         $this->table=$table;
         $this->attr=null;
+        $this->order=null;
         $this->query=null;
+        $this->inWord=null;
         $this->where=1;
     }
     function select($attr='*'){
@@ -40,6 +45,21 @@ class table {
         $this->where=$where;
         return $this;
     }
+    public function orderby($word,$or){
+        $this->order['word']=$word;
+        $this->order['order']=$or;
+        return $this;
+    }
+    public function limit($start,$num){
+        $this->li['start']=$start;
+        $this->li['num']=$num;
+        return $this;
+    }
+    public function in($word,$arr){
+        $this->inWord['word']=$word;
+        $this->inWord['include']=implode("','",$arr);
+        return $this;
+    }
     public function sql(){
         $returnValue='';
         switch($this->query){
@@ -48,7 +68,7 @@ class table {
                 $value='';
                 foreach($this->attr as $assoc=>$val){
                     $tuple.=$assoc.",";
-                    $value.="'".$val."'".",";
+                    $value.="'{$val}',";
                 }
                 $tuple=substr($tuple,0,-1);
                 $value=substr($value,0,-1);
@@ -63,6 +83,15 @@ class table {
                 break;
             case 'select':
                 $sql="select ".$this->attr." from ".$this->table." where ".$this->where;
+                if($this->inWord!=null){
+                    $sql.=" and ".$this->inWord['word']." in ('".$this->inWord['include']."')";
+                }
+                if($this->order!=null){
+                    $sql.=" order by ".$this->order['word']." ".$this->order['order'];
+                }
+                if($this->li!=null){
+                    $sql.=" limit ".$this->li['start'].",".$this->li['num'];
+                }
                 if($re=mysql_query($sql)){
                     $r=array();
                     while($result=mysql_fetch_assoc($re)){
